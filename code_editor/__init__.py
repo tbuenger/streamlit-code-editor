@@ -46,7 +46,7 @@ else:
 # `declare_component` and call it done. The wrapper allows us to customize
 # our component's API: we can pre-process its input args, post-process its
 # output value, and add a docstring for users.
-def code_editor(code, lang='python', theme="default", shortcuts="vscode", height=30, focus=False, allow_reset=False, replace_completer=False, response_mode="default", ghost_text="", snippets=["", ""], completions=[], keybindings={}, buttons=[], menu={}, info={}, options={}, props={}, editor_props={}, component_props={}, key=None):
+def code_editor(code, lang='python', theme="default", shortcuts="vscode", height=30, focus=False, allow_reset=False, replace_completer=False, response_mode="default", ghost_text="", snippets=["", ""], completions=[], keybindings={}, buttons=[], menu={}, info={}, annotations=None, options={}, props={}, editor_props={}, component_props={}, key=None):
     """Create a new instance of "code_editor".
 
     Parameters
@@ -70,7 +70,7 @@ def code_editor(code, lang='python', theme="default", shortcuts="vscode", height
     #
     # "default" is a special argument that specifies the initial return
     # value of the component before the user has interacted with it.
-    component_value = _component_func(code=code, lang=lang, theme=theme, key=key, height=height, focus=focus, shortcuts=shortcuts, snippets=snippets, completions=completions, keybindings=keybindings, buttons=buttons, options=options, props=props, editor_props=editor_props, component_props=component_props, menu=menu, info=info, allow_reset=allow_reset, replace_completer=replace_completer, response_mode=response_mode, ghost_text=ghost_text, default={"id": "", "type": "", "lang": "", "text": "", "selected": "", "cursor": ""})
+    component_value = _component_func(code=code, lang=lang, theme=theme, key=key, height=height, focus=focus, shortcuts=shortcuts, snippets=snippets, completions=completions, keybindings=keybindings, buttons=buttons, menu=menu, info=info, annotations=annotations or [], options=options, props=props, editor_props=editor_props, component_props=component_props, allow_reset=allow_reset, replace_completer=replace_completer, response_mode=response_mode, ghost_text=ghost_text, default={"id": "", "type": "", "lang": "", "text": "", "selected": "", "cursor": ""})
 
     # We could modify the value returned from the component if we wanted.
     # There's no need to do this in our simple example - but it's an option.

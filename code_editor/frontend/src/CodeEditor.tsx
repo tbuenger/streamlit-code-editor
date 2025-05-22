@@ -656,8 +656,9 @@ const CodeEditor = ({ args, width, disabled, theme }: CodeEditorProps) => {
          commands={commands.commands} 
          completions={revertedArgs['completions']}
          replaceCompleter={revertedArgs['replace_completer']}
-         keybindingString={keybindings} 
-         props={aceProps} 
+         keybindingString={keybindings}
+         annotations={revertedArgs['annotations']}
+         props={aceProps}
          onChange={onChangeHandler}
          onSelectionChange={onSelectionChangeHandler}
          onBlur={onEditorBlur}  
