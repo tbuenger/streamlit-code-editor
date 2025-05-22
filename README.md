@@ -28,6 +28,19 @@ Without specifying a language, the editor will default to `python`. You can also
 response_dict = code_editor(your_code_string, lang="javascript")
 ```
 By default, each code editor is styled like streamlit's code component. We will go over how to customize the styling in a later section.
+
+### Displaying Error Annotations
+
+The editor accepts an optional `annotations` argument. Pass a list of
+Ace style annotation dictionaries to highlight errors returned by your
+backend. When the `annotations` list is updated, the editor now refreshes
+its markers without a full rerender:
+
+```python
+annotations = [{"row": 2, "column": 4, "text": "syntax error", "type": "error"}]
+response_dict = code_editor(query, lang="sql", annotations=annotations)
+```
+
 ## Docs [![Component Guide](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://code-editor-documentation.streamlit.app/)
 ![guide](./examples/resources/guide_screenshot.png)
 
