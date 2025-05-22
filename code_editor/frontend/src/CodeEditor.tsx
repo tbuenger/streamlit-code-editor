@@ -593,13 +593,24 @@ const CodeEditor = ({ args, width, disabled, theme }: CodeEditorProps) => {
   const themeProp = themeChoice();
   const componentContainerProps = args["component_props"];
 
-  const {info: infoArg, menu: menuArg, focus: focusArg, code: codeArg, ...rest} = args;
+  const {info: infoArg, menu: menuArg, focus: focusArg, code: codeArg, annotations: annotationArg, ...rest} = args;
   const editorArgsString = JSON.stringify(rest);
   const menuArgsString = JSON.stringify(menuArg);
   const infoArgsString = JSON.stringify(infoArg);
   const buttonArgsString = JSON.stringify(args['buttons']);
   const themeString = JSON.stringify(theme);
   const snippets = JSON.stringify(snippetAddRemove);
+
+  useEffect(() => {
+    if (aceEditor.current) {
+      const editor = aceEditor.current.editor;
+      if (editor && annotationArg) {
+        editor.getSession().setAnnotations(annotationArg);
+      } else if (editor) {
+        editor.getSession().setAnnotations([]);
+      }
+    }
+  }, [annotationArg]);
 
   /**
    * This section contains the main sub-components (child components). These components are wrapped in useMemos
@@ -656,8 +667,8 @@ const CodeEditor = ({ args, width, disabled, theme }: CodeEditorProps) => {
          commands={commands.commands} 
          completions={revertedArgs['completions']}
          replaceCompleter={revertedArgs['replace_completer']}
-         keybindingString={keybindings} 
-         props={aceProps} 
+         keybindingString={keybindings}
+         props={aceProps}
          onChange={onChangeHandler}
          onSelectionChange={onSelectionChangeHandler}
          onBlur={onEditorBlur}  

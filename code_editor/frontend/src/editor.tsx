@@ -34,12 +34,13 @@ export type EditorProps = {
     completions: object[],
     keybindingString: string,
     replaceCompleter: boolean,
+    annotations?: ace.Ace.Annotation[],
     onChange: (value: string, event?: any) => void,
     onSelectionChange: (value: any, event?: any) => void,
     onBlur: (event: any, editor?: any) => void
   }
   
-export const Editor = ({ lang, theme, shortcuts, props, snippetString, commands, completions, ghostText, keybindingString, editorRef, code, replaceCompleter, onChange, onSelectionChange, onBlur }: EditorProps ) => {
+export const Editor = ({ lang, theme, shortcuts, props, snippetString, commands, completions, ghostText, keybindingString, editorRef, code, replaceCompleter, annotations, onChange, onSelectionChange, onBlur }: EditorProps ) => {
     
   let commandsList = useRef<object[]>(commands);
   useEffect(() => {
@@ -130,11 +131,12 @@ export const Editor = ({ lang, theme, shortcuts, props, snippetString, commands,
            mode={lang}
            theme={theme}
            value={code}
-           keyboardHandler={shortcuts}
-           commands={commandsList.current}
-           onChange={onChange}
-           onSelectionChange={onSelectionChange}
-           onBlur={onBlur}
-           {...props}/>
+          keyboardHandler={shortcuts}
+          commands={commandsList.current}
+          annotations={annotations}
+          onChange={onChange}
+          onSelectionChange={onSelectionChange}
+          onBlur={onBlur}
+          {...props}/>
   );
 };
